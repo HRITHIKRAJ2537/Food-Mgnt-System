@@ -1,20 +1,42 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>SE</groupId>
-  <artifactId>Food-System</artifactId>
-  <packing>war</packing>
+  <artifactId>food-system</artifactId> <!-- lowercase -->
+  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>FoodSystem Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <url>http://myprojectsite.com</url> <!-- optional: project URL -->
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
-      <artifactId>as</artifactId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope> <!-- servlet API needed for WAR -->
+    </dependency>
   </dependencies>
+  
   <build>
-    <finalName>Food-System-xyz</finalName>
+    <finalName>food-system-xyz</finalName> <!-- matches artifactId -->
+    <plugins>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <path>/food-system</path>
+          <port>8080</port>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
