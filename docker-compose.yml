@@ -15,3 +15,49 @@ services:
    POSTGRES_PASSWORD: postgres
   ports:
    - "5432:5432"
+
+
+
+
+   version: "3.8"
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wp
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+
+  wordpress:
+    image: wordpress
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wp
+    depends_on:
+      - db
+
+
+
+
+version: "3.8"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  nodeapp:
+    image: node
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    command: sh -c "npm install && npm start"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
